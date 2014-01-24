@@ -1,15 +1,17 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.64)
+AC_PREREQ([2.69])
 AC_INIT([Themis],[0.2.0],[acy@hiemalis.org])
-AC_CONFIG_SRCDIR(except.h)
-AC_CONFIG_HEADER(config.h)
+AC_CONFIG_SRCDIR([config.h.in])
+AC_CONFIG_HEADERS([config.h])
+#AC_CONFIG_SRCDIR(except.h)
+#AC_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE
 
 # Checks for programs.
-AC_PROG_CC
 AC_PROG_CXX
+AC_PROG_CC
 AC_PROG_RANLIB
 
 
@@ -20,12 +22,10 @@ AC_PROG_RANLIB
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_C_INLINE
-
+AC_TYPE_SIZE_T
 
 
 # Checks for library functions.
-
-
 
 
 
@@ -84,5 +84,5 @@ AC_LANG_POP()
 
 
 # output
-AC_CONFIG_FILES(Makefile)
+AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
