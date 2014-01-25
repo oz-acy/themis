@@ -2,7 +2,7 @@
  *
  *  strconv.h
  *  by oZ/acy
- *  (c) 2009 oZ/acy. ALL RIGHTS RESERVED.
+ *  (c) 2009-2014 oZ/acy. ALL RIGHTS RESERVED.
  *
  *  •¶š—ñÌŠ·ˆê®
  *
@@ -12,6 +12,7 @@
  *    7 Nov MMIX  C³
  *    9 Nov MMIX  C³
  *   14 Nov MMIX  C³
+ *   25 Jan MMXIV  C³
  */
 #ifndef INC_STRING_CONV_H_
 #define INC_STRING_CONV_H_
@@ -44,8 +45,7 @@ public:
   static std::wstring toLower(const std::wstring& ws);
 };
 
-std::string toLower(const std::string& s);
-std::wstring toLower(const std::wstring& ws);
+
 
 
 }//end of namespace themis
