@@ -83,15 +83,15 @@ subdir = .
 DIST_COMMON = INSTALL NEWS README AUTHORS ChangeLog \
 	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
-	$(srcdir)/config.h.in depcomp $(themisinclude_HEADERS) COPYING \
-	compile install-sh missing
+	$(srcdir)/config.h.in mkinstalldirs depcomp \
+	$(themisinclude_HEADERS) COPYING compile install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
-mkinstalldirs = $(install_sh) -d
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
@@ -224,12 +224,12 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = aclocal-1.14
+ACLOCAL = ${SHELL} /home/strawberry/acy/dev/src/themis/missing aclocal-1.14
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = autoconf
-AUTOHEADER = autoheader
-AUTOMAKE = automake-1.14
+AUTOCONF = ${SHELL} /home/strawberry/acy/dev/src/themis/missing autoconf
+AUTOHEADER = ${SHELL} /home/strawberry/acy/dev/src/themis/missing autoheader
+AUTOMAKE = ${SHELL} /home/strawberry/acy/dev/src/themis/missing automake-1.14
 AWK = gawk
 CC = x86_64-w64-mingw32-gcc
 CCDEPMODE = depmode=gcc3
@@ -257,22 +257,22 @@ LDFLAGS = -L/usr/local/mw/lib
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = makeinfo
+MAKEINFO = ${SHELL} /home/strawberry/acy/dev/src/themis/missing makeinfo
 MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
 PACKAGE = themis
 PACKAGE_BUGREPORT = acy@hiemalis.org
 PACKAGE_NAME = Themis
-PACKAGE_STRING = Themis 0.2.0
+PACKAGE_STRING = Themis 0.2.1
 PACKAGE_TARNAME = themis
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.2.0
+PACKAGE_VERSION = 0.2.1
 PATH_SEPARATOR = :
 RANLIB = ranlib
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = 
-VERSION = 0.2.0
+VERSION = 0.2.1
 abs_builddir = /home/strawberry/acy/dev/src/themis
 abs_srcdir = /home/strawberry/acy/dev/src/themis
 abs_top_builddir = /home/strawberry/acy/dev/src/themis

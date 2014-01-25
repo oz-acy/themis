@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([Themis],[0.2.0],[acy@hiemalis.org])
+AC_INIT([Themis],[0.2.1],[acy@hiemalis.org])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADERS([config.h])
 #AC_CONFIG_SRCDIR(except.h)
