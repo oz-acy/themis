@@ -5,8 +5,6 @@ AC_PREREQ([2.69])
 AC_INIT([Themis],[0.2.1],[acy@hiemalis.org])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADERS([config.h])
-#AC_CONFIG_SRCDIR(except.h)
-#AC_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE
 
 # Checks for programs.
@@ -18,6 +16,7 @@ AC_PROG_RANLIB
 # Checks for libraries.
 
 # Checks for header files.
+AC_CHECK_HEADER([iconv.h],[], [AC_MSG_ERROR(iconv.h is not found.)])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
@@ -26,8 +25,6 @@ AC_TYPE_SIZE_T
 
 
 # Checks for library functions.
-
-
 
 
 # ==== check others ================================================
