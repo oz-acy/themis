@@ -6,9 +6,11 @@
  *
  *  óöó
  *   13 Nov MMIX  çÏê¨
- *   26 Feb MMXVI  èCê≥
+ *   28 Feb MMXVI  èCê≥
  */
+
 #include <algorithm>
+#include <memory>
 #include "strconv.h"
 
 /*===========================================
@@ -29,24 +31,20 @@ std::string themis::StringConverter::convert(const std::string& s)
   using namespace std;
 
   size_t ilen = s.size();
-  char* ibuf = new char[ilen + 1];
-  copy(s.c_str(), s.c_str() + ilen + 1, ibuf);
-  char* pi = ibuf;
+  unique_ptr<char[]> ibuf(new char[ilen + 1]);
+
+  copy(s.c_str(), s.c_str() + ilen + 1, ibuf.get());
+  char* pi = ibuf.get();
 
   size_t rlen = (ilen + 1) * 2;
-  char* rbuf = new char[rlen];
-  fill(rbuf, rbuf + rlen, 0);
-  char* pr = rbuf;
+  unique_ptr<char[]> rbuf(new char[rlen]); 
+  fill(rbuf.get(), rbuf.get() + rlen, 0);
+  char* pr = rbuf.get();
 
   size_t rlen2 = rlen;
   rlen2 = iconv(cv_, &pi, &ilen, &pr, &rlen2);
 
-  string r = rbuf;
-
-  delete[] rbuf;
-  delete[] ibuf;
-
-  return r;
+  return string(rbuf.get());
 }
 
 
