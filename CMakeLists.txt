@@ -5,7 +5,7 @@ SET(CMAKE_VERBOSE_MAKEFILE 1)
 
 #PROJECT(themis CXX)
 
-SET(CMAKE_CXX_COMPILER /usr/bin/x86_64-w64-mingw32-clang++)
+#SET(CMAKE_CXX_COMPILER /usr/bin/x86_64-w64-mingw32-clang++)
 SET(CMAKE_CXX_FLAGS "-Wall -std=c++14 -O3")
 
 ADD_LIBRARY(themis STATIC
