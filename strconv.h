@@ -2,7 +2,7 @@
  *
  *  strconv.h
  *  by oZ/acy
- *  (c) 2009-2014 oZ/acy. ALL RIGHTS RESERVED.
+ *  (c) 2009-2016 oZ/acy. ALL RIGHTS RESERVED.
  *
  *  ï∂éöóÒùÃä∑àÍéÆ
  *
@@ -13,19 +13,13 @@
  *    9 Nov MMIX  èCê≥
  *   14 Nov MMIX  èCê≥
  *   25 Jan MMXIV  èCê≥
+ *   26 Feb MMXVI  èCê≥
  */
 #ifndef INC_STRING_CONV_H_
 #define INC_STRING_CONV_H_
 
 #include <string>
 #include <iconv.h>
-
-
-#if !defined(HAVE_STD_WSTRING)
-namespace std {
-typedef basic_string<wchar_t> wstring;
-}
-#endif
 
 
 namespace themis{
@@ -44,8 +38,6 @@ public:
   static std::string toLower(const std::string& s);
   static std::wstring toLower(const std::wstring& ws);
 };
-
-
 
 
 }//end of namespace themis

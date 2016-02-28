@@ -2,10 +2,11 @@
  *
  *  strconv.cpp
  *  by oZ/acy
- *  (c) 2009 oZ/acy. ALL RIGHTS RESERVED.
+ *  (c) 2009-2016 oZ/acy. ALL RIGHTS RESERVED.
  *
  *  óöó
  *   13 Nov MMIX  çÏê¨
+ *   26 Feb MMXVI  èCê≥
  */
 #include <algorithm>
 #include "strconv.h"
@@ -30,7 +31,7 @@ std::string themis::StringConverter::convert(const std::string& s)
   size_t ilen = s.size();
   char* ibuf = new char[ilen + 1];
   copy(s.c_str(), s.c_str() + ilen + 1, ibuf);
-  ICONV_CONST char* pi = ibuf;
+  char* pi = ibuf;
 
   size_t rlen = (ilen + 1) * 2;
   char* rbuf = new char[rlen];
