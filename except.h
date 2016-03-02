@@ -1,14 +1,15 @@
 /**************************************************************************
-*
-*  except.h
-*  by oZ/acy
-*  (c) 2001-2009 oZ/acy. ALL RIGHTS RESERVED.
-*
-*  last update: 2009.10.12
-*
-*  EXCEPTion information container
-*  —áŠOî•ñŠi”[ƒNƒ‰ƒXƒwƒbƒ_[
-**************************************************************************/
+ *
+ *  except.h
+ *  by oZ/acy
+ *  (c) 2001-2016 oZ/acy. ALL RIGHTS RESERVED.
+ *
+ *  EXCEPTion information container
+ *  ä¾‹å¤–æƒ…å ±æ ¼ç´ã‚¯ãƒ©ã‚¹ãƒ˜ãƒƒãƒ€ãƒ¼
+ *
+ *  å±¥æ­´
+ *    2016.3.2  C++11å°æ‡‰
+ *************************************************************************/
 #ifndef INC_THEMIS_EXCEPT_H__
 #define INC_THEMIS_EXCEPT_H__
 
@@ -21,16 +22,16 @@ namespace themis
 
 /*---------------------------------------------------------------------------
 *  class EmptyException
-*  ‹ó‚Ì—áŠOƒNƒ‰ƒX
-*  part "THEMIS" ‚Å‚Ì—áŠO‚Í‚±‚ÌƒNƒ‰ƒX(or ”h¶ƒNƒ‰ƒX)‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚½‚é‚×‚µ
+*  ç©ºã®ä¾‹å¤–ã‚¯ãƒ©ã‚¹
+*  part "THEMIS" ã§ã®ä¾‹å¤–ã¯ã“ã®ã‚¯ãƒ©ã‚¹(or æ´¾ç”Ÿã‚¯ãƒ©ã‚¹)ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŸã‚‹ã¹ã—
 *--------------------------------------------------------------------------*/
 class EmptyException : public std::exception
 {
 public:
-  EmptyException() throw() {}
-  virtual ~EmptyException() throw() {}
+  EmptyException() noexcept {}
+  virtual ~EmptyException() noexcept {}
 
-  virtual const char* what() const throw()
+  virtual const char* what() const noexcept
   {
     static const char rstr[] = "themis::EmptyException";
     return rstr;
@@ -42,8 +43,8 @@ public:
 
 /*------------------------------------------
 *  class Exception
-*  ƒƒbƒZ[ƒW•¶š—ñ‚ğ‚Â—áŠOƒNƒ‰ƒX
-*  std::ostream ‚Ö‚Ìo—Í‚à‰Â”\
+*  ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸æ–‡å­—åˆ—ã‚’æŒã¤ä¾‹å¤–ã‚¯ãƒ©ã‚¹
+*  std::ostream ã¸ã®å‡ºåŠ›ã‚‚å¯èƒ½
 *-----------------------------------------*/
 class Exception;
 std::ostream& operator<<(std::ostream& os, const Exception& ex);
@@ -57,7 +58,7 @@ protected:
   std::string msg_;
 
 public:
-  Exception() throw() {}
+  Exception() noexcept {}
   Exception(const std::string& m) : msg_(m) {}
 
   Exception(const std::string& c, const std::string& f, const std::string& w)
@@ -67,7 +68,7 @@ public:
 
   ~Exception() throw () {}
 
-  const char* what() const throw()
+  const char* what() const noexcept
   {
     static const char rstr[] = "themis::Exception";
     return rstr;
