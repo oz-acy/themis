@@ -1,12 +1,13 @@
 # CMakeLists.txt for project THEMIS
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 SET(CMAKE_VERBOSE_MAKEFILE 1)
 
 #PROJECT(themis CXX)
 
 #SET(CMAKE_CXX_COMPILER /usr/bin/x86_64-w64-mingw32-clang++)
-SET(CMAKE_CXX_FLAGS "-Wall -std=c++14 -O3")
+#SET(CMAKE_CXX_FLAGS "-Wall -std=c++14 -O3")
+SET(CMAKE_CXX_FLAGS "-Wall -std=c++11 -O3")
 
 ADD_LIBRARY(themis STATIC
   strconv.cpp

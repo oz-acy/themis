@@ -1,12 +1,12 @@
 "INSTALL" of LIBTHEMIS
 
-1. ����Ū�ˤϡ�cmake, make, make install ������Ԥ���С�
-   �ܥ饤�֥��Υإå��ե������饤�֥�ꥢ�������֤�
-   /usr/local/include, /usr/local/lib �˥��󥹥ȡ��뤵��롣
+1. 基本的には、cmake ., make, make install を順に實行すれば、
+   本ライブラリのヘッダファイルやライブラリアーカイブは
+   /usr/local/include, /usr/local/lib にインストールされる。
 
-2. prefix ���ι�������� cmake -DCMAKE_INSTALL_PREFIX=DIR �Ȥ��롣
-   ¶��¾��configuration����ˡ�� cmake �λȤ�����Ĵ�٤�줿����
+2. prefix を變更する場合は cmake -DCMAKE_INSTALL_PREFIX=DIR とする。
+   その他、configurationの方法は cmake の使ひ方を調べられたい。
 
-3. Autotools �𷸤Υե�������ݼ�Ϥ�᤿�Τǡ�
-   �̤ĤƤ��ե����뤬¶���ֻȤؤ�Ȥϸ¤�ʤ���
-   Ŭ�������������Ѥ���Τϲġ�
+3. Autotools 關係のファイルの保守はやめたので、
+   殘つてゐるファイルが其の儘使へるとは限らない。
+   適宜修正して利用するのは可。
