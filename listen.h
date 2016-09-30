@@ -73,7 +73,7 @@ private:
  * ’Ê’m›”Û‚Ì Listener<E_> ‚Í˜¬‚ß Talker<E_> ‚É add() ‚³‚ê‚é
  */
 template<class E_>
-class themis::Talker : boost:noncopyable
+class themis::Talker : boost::noncopyable
 {
 private:
   typedef class themis::Listener L_;
