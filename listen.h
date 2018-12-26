@@ -1,20 +1,19 @@
-/**************************************************************************
+/*************************************************************************//**
  *
- *  listen.h
- *  by oZ/acy
- *  (c) 2001-2016 oZ/acy. ALL RIGHTS RESERVED.
- *
- *  ƒCƒxƒ“ƒgƒhƒŠƒuƒ“‹@\Šî’êˆê®
- *  Observerƒpƒ^[ƒ“‚ÉŠî‚Ã‚­
- *
- *  2016.8.10  Talker<E_>::changed() ‚ğ Talker<E_>::notify() ‚ÉÌX
- *             ‘´‚Ì‘¼C³
- *************************************************************************/
-
+ *  @file listen.h
+ *  @author oZ/acy (åè³€æœˆæ™ƒå—£)
+ *  @brief Observerãƒ‘ã‚¿ãƒ¼ãƒ³ã«åŸºã¥ãã‚¤ãƒ™ãƒ³ãƒˆãƒ‰ãƒªãƒ–ãƒ³æ©Ÿæ§‹ã®åŸºåº•ã‚¯ãƒ©ã‚¹ä¸€å¼
+ *  @date 2016.8.10
+ *    Talker<E_>::changed() ã‚’ Talker<E_>::notify() ã«è®Šæ›´ã€å…¶ã®ä»–ä¿®æ­£
+ *  @date 2018.12.26
+ *    æ‹”æœ¬çš„ä¿®æ­£
+ *//*
+ *  (c) 2001-2018 oZ/acy. ALL RIGHTS RESERVED.
+ */
 #ifndef INC_THEMIS_LISTENER_H___
 #define INC_THEMIS_LISTENER_H___
 
-#include <vector>
+#include <list>
 #include <algorithm>
 #include <boost/utility.hpp>
 
@@ -25,9 +24,8 @@ namespace themis
 }
 
 
-/*---------------------------------------------------------------
- *  Listener<E_>
- *  ƒCƒxƒ“ƒg E_ ‚ğTalker<E_>‚©‚ç’Ê’m‚³‚ê‚Ä™|—‚·‚éƒNƒ‰ƒX‚ÌŠî’ê
+/**
+ * @brief ã‚¤ãƒ™ãƒ³ãƒˆE_ã‚’Talker<E_>ã‹ã‚‰é€šçŸ¥ã•ã‚Œã¦è™•ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹ã®åŸºåº•
  */
 template<class E_>
 class themis::Listener : boost::noncopyable
@@ -35,98 +33,104 @@ class themis::Listener : boost::noncopyable
   friend class themis::Talker<E_>;
 
 private:
-  typedef themis::Talker<E_> T_;
-
-private:
-  std::vector<T_*> tkr_;
+  themis::Talker<E_>* tkr_;
 
 public:
-  constexpr Listener() noexcept {}
+  /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ§‹ç¯‰å­
+  constexpr Listener() noexcept : tkr_(nullptr) {}
 
+  /// è§£é«”å­
   virtual ~Listener()
   {
-    //std::vector<T_*>::iterator it;
-    for (auto it = tkr_.begin(); it != tkr_.end(); it++)
-      (*it)->remove(this);
+    if (tkr_)
+      tkr_->remove(this);
   }
 
+  /// @brief æ›´æ–°(ã‚¤ãƒ™ãƒ³ãƒˆé€šçŸ¥)
+  ///
+  /// Talkerã‹ã‚‰ã‚¤ãƒ™ãƒ³ãƒˆeã‚’å¯¦å¼•æ•¸ã¨ã—ã¦å‘¼ã³å‡ºã•ã‚Œã‚‹ã€‚
+  /// è™•ç†å†…å®¹ã¯æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã§å¯¦è£ã™ã‚‹ã€‚
   virtual void update(const E_&) =0;
 
 private:
-  /*
-   *  tkr_ ‚©‚ç t ‚ğæ‚èœ‚­
-   *  Talker<E_>::remove()‚©‚çŒÄ‚Î‚ê‚é
+  /**
+   *  @brief Talkerã®è¨­å®š
+   *
+   *  TalkerãŒå·±ã‚’add()ã—ãŸã¨ãã«ã€ãã®é€šçŸ¥ã‚’å—ã‘ã€é€£çµã‚’å½¢æˆã™ã‚‹ã€‚
    */
-  void removeFromTalker__(T_* t)
+  void setTalker__(themis::Talker<E_>* t)
   {
-    //std::vector<T_*>::iterator it = std::find(tkr_.begin(),tkr_.end(),t);
-    auto it = std::find(tkr_.begin(), tkr_.end(), t);
-    if(it != tkr_.end())
-      tkr_.erase(it);
+    if (tkr_)
+      tkr_->remove(this);
+    tkr_ = t;
+  }
+
+  /**
+   *  @brief Talkeré™¤å»
+   *
+   *  TalkerãŒå·±ã‚’remove()ã—ãŸã¨ãã«ã€ãã®é€šçŸ¥ã‚’å—ã‘ã€é€£çµã‚’åˆ‡æ–·ã™ã‚‹ã€‚
+   */
+  void removeFromTalker__()
+  {
+    tkr_ = nullptr;
   }
 };
 
 
-/*---------------------------------------------------------------
- * Talker<E_>
- * ƒCƒxƒ“ƒg E_ ‚ğ Listener<E_> ‚Éˆêê’Ê’m‚·‚éƒNƒ‰ƒX‚ÌŠî’ê
- * ’Ê’m›”Û‚Ì Listener<E_> ‚Í˜¬‚ß Talker<E_> ‚É add() ‚³‚ê‚é
+/**
+ * @brief ã‚¤ãƒ™ãƒ³ãƒˆ E_ ã‚’ Listener<E_> ã«ä¸€é½Šé€šçŸ¥ã™ã‚‹ã‚¯ãƒ©ã‚¹ã®åŸºåº•
  */
 template<class E_>
 class themis::Talker : boost::noncopyable
 {
 private:
-  typedef class themis::Listener L_;
-
-private:
-  std::vector<L_*> lsns_;
+  std::list<themis::Listener<E_>*> lsns_; ///< é€šçŸ¥å°è±¡ã®Listenerã®ãƒªã‚¹ãƒˆ
 
 public:
+  /// @brief ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ§‹ç¯‰å­
   constexpr Talker() noexcept {}
 
+  /// @brief è§£é«”å­
   virtual ~Talker()
   {
-    //std::vector<L_*>::iterator it;
     for (auto it = lsns_.begin(); it != lsns_.end(); it++)
-      (*it)->removeFromTalker__(this);
+      (*it)->removeFromTalker__();
   }
 
 
-  /*===================================================
-   *  add()
-   *  ƒŠƒXƒi[ lsn ‚ğƒCƒxƒ“ƒg’Ê’m›”Û‚É‰Á‚Ö‚é
+  /**
+   *  @brief ãƒªã‚¹ãƒŠãƒ¼lsnã‚’ã‚¤ãƒ™ãƒ³ãƒˆé€šçŸ¥å°è±¡ã«è¿½åŠ 
    */
-  void add(L_* lsn)
+  void add(themis::Listener<E_>* lsn)
   {
-    //std::vector<L_*>::iterator it;
     auto it = std::find(lsns_.begin(), lsns_.end(), lsn);
-    if (it == lsns_.end())
+    if (it == lsns_.end()) {
       lsns_.push_back(lsn);
+      lsn->addToTalker__(this);
+    }
   }
 
 
-  /*===================================================
-   *  remove()
-   *  ƒŠƒXƒi[ lsn ‚ğƒCƒxƒ“ƒg’Ê’m›”Û‚©‚çí‚é
+  /**
+   * @brief ãƒªã‚¹ãƒŠãƒ¼lsnã‚’ã‚¤ãƒ™ãƒ³ãƒˆé€šçŸ¥å°è±¡ã‹ã‚‰é™¤å»
    */
-  void remove(L_* lsn)
+  void remove(themis::Listener<E_>* lsn)
   {
-    //std::vector<L_*>::iterator it;
     auto it = std::find(lsns_.begin(), lsns_.end(), lsn);
     if (it != lsns_.end())
     {
-      (*it)->removeFromTalker__(this);
+      (*it)->removeFromTalker__();
       lsns_.erase(it);
     }
   }
 
-  /*===================================================
-   *  notify()
-   *  ƒCƒxƒ“ƒg e ‚ğƒŠƒXƒi[‚Éˆêê’Ê’m‚·‚é
+  /**
+   * @brief ã‚¤ãƒ™ãƒ³ãƒˆé€šçŸ¥
+   *
+   * ã‚¤ãƒ™ãƒ³ãƒˆeã‚’é€šçŸ¥å°è±¡ã®ãƒªã‚¹ãƒŠãƒ¼å…¨ã¦ã«é€šçŸ¥ã™ã‚‹ã€‚
    */
   void notify(const E_& e)
   {
-    //std::vector<L_*>::iterator it;
     for (auto it = lsns_.begin(); it != lsns_.end(); it++)
       (*it)->update(e);
   }

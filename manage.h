@@ -1,19 +1,16 @@
-/**************************************************************************
-*
-*  manage.h
-*  by oZ/acy
-*  (c) 2001-2011 oZ/acy. ALL RIGHTS RESERVED.
-*
-*  MANAGEr/managed object  in THEMIS
-*  �Ǘ��E��Ǘ��I�u�W�F�N�g�p�����ꎮ
-*
-*  last update: 2011.9.8
-**************************************************************************/
-
+/**********************************************************************//**
+ *
+ * @file manage.h
+ * @author oZ/acy (名賀月晃嗣)
+ * @brief 管理・被管理者基底クラス一式
+ *
+ * @date 2018.12.26
+ *   再實裝しようとしたが、仕樣の再檢討が必要であるため、一旦中止
+ */
 #ifndef INC_THEMIS_MANAGE_H___
 #define INC_THEMIS_MANAGE_H___
 
-#include <vector>
+#include <list>
 #include <algorithm>
 #include <boost/utility.hpp>
 
@@ -21,102 +18,84 @@
 namespace themis
 {
   class Managed;
-  class ManagerBase;
-  template<class T> class Manager;
+  class Manager;
 };
 
 
-/*-------------------------------
-*  ManagerBase
-*  �Ǘ��I�u�W�F�N�g���N���X
-*------------------------------*/
-class themis::ManagerBase
+
+
+/*-----------------------------------*//**
+ * @brief 被管理者基底クラス
+ */
+class themis::Managed : boost::noncopyable
+{
+  friend class themis::Manager;
+
+private:
+  themis::Manager* mng_;  ///< 管理者
+
+private:
+  /// @brief 管理オブジェクトへの連結を形成
+  void atach__(themis::Manager* m) {mng_ = m; }
+  /// @brief 管理オブジェクトへの連結を切斷
+  void detach__() { mng_ = nullptr; }
+
+protected:
+  /// デフォルト構築子
+  Managed() : mng_(nullptr) {}
+
+public:
+  /// 解體子
+  virtual ~Managed();
+};
+
+
+/*----------------------------------------------------*//**
+ *  @brief 管理者クラス
+ */
+class themis::Manager : public themis::ManagerBase
 {
   friend class themis::Managed;
 
 protected:
-  virtual void kill(themis::Managed*) =0;
-  void mankill(themis::Managed*);
+  std::list<T_*> a_;
 
-public:
-  virtual ~ManagerBase() {}
-};
-
-
-/*-----------------------------------
-*  Managed
-*  ��Ǘ��I�u�W�F�N�g�p���N���X
-*----------------------------------*/
-class themis::Managed : boost::noncopyable
-{
-  friend class themis::ManagerBase;
-
-private:
-  themis::ManagerBase* mng_;
-
-protected:
-  Managed(themis::ManagerBase* m =nullptr) : mng_(m) {}
-
-public:
-  virtual ~Managed()
+  void remove(themis::Managed* obj)
   {
-    if(mng_)
-      mng_->kill(this);
+    auto i = std::find(a_.begin(); a_.end(); obj);
+    if (i != a_.end()) {
+      obj.detach__();
+      a_.erase(i);
+    }
   }
-};
-
-
-/*----------------------------------------------------
-*  Manager<T>
-*  T�^�̃I�u�W�F�N�g�ɑ΂���Ǘ��I�u�W�F�N�g�N���X
-*---------------------------------------------------*/
-template<class T_>
-class themis::Manager : public themis::ManagerBase
-{
-protected:
-  std::vector<T_*> a_;
-
-  virtual void kill(themis::Managed* obj);
 
 public:
-  Manager() {}
-  ~Manager();
+  Manager() {}  ///< デフォルト構築子
+  virtual ~Manager();   ///< 解體子
 
-  void add(T_* t) { a_.push_back(t); }
+  /// @brief 被管理オブジェクトを追加
+  void add(Managed* m)
+  {
+    a_.push_back(m);
+    m->atach__(this);
+  }
 
+  /// @brief 被管理オブジェクトすべてに指定處理を實行
   template<class FNC>
   void forEach(FNC fnc) { std::for_each(a_.begin(), a_.end(), fnc); }
 };
 
 
+////////////////////////////////////////
 
-/* inline methods */
-inline void themis::ManagerBase::mankill(themis::Managed* obj)
-{
-  obj->mng_ = nullptr;
-}
-
-
-template<class T_>
 inline
-themis::Manager<T_>::~Manager()
+themis::Managed::~Managed()
 {
-  std::vector<T_*>::iterator i;
-  for(i=a_.begin(); i!=a_.end(); i++)
-    mankill(*i);
+  if (mng_)
+    mng_->remove(this);
 }
 
-template<class T_>
-inline
-void themis::Manager<T_>::kill(themis::Managed* obj)
-{
-  std::vector<T_*>::iterator i = std::find(a_.begin(), a_.end(), obj);
-  if(i!=a_.end())
-  {
-    mankill(obj);
-    a_.erase(i);
-  }
-}
+
 
 
 #endif // INC_THEMIS_MANAGE_H___
