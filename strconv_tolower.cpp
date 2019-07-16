@@ -4,10 +4,10 @@
  *  by oZ/acy
  *  (c) 2009 oZ/acy. ALL RIGHTS RESERVED.
  *
- *  —š—ð
- *    4 Apr MMIX  ì¬
- *   16 Apr MMIX  C³
- *   13 Nov MMIX  C³
+ *  å±¥æ­´
+ *    4 Apr MMIX  ä½œæˆ
+ *   16 Apr MMIX  ä¿®æ­£
+ *   13 Nov MMIX  ä¿®æ­£
  */
 #include "strconv.h"
 #include <cctype>

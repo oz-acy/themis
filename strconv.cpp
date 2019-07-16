@@ -2,13 +2,13 @@
  *
  *  strconv.cpp
  *  by oZ/acy
- *  (c) 2009-2016 oZ/acy. ALL RIGHTS RESERVED.
+ *  (c) 2009-2019 oZ/acy. ALL RIGHTS RESERVED.
  *
- *  ЧЪЧЁ
- *   13 Nov MMIX  НьРм
- *   28 Feb MMXVI  ПCР│
+ *  х▒ецн┤
+ *   13 Nov MMIX  ф╜ЬцИР
+ *   28 Feb MMXVI ф┐оцнг
+ *   16 Jul MMXIX ф┐оцнг
  */
-
 #include <algorithm>
 #include <memory>
 #include "strconv.h"

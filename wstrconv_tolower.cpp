@@ -4,11 +4,11 @@
  *  by oZ/acy
  *  (c) 2009 oZ/acy. ALL RIGHTS RESERVED.
  *
- *  ЧЪЧЁ
- *    4 Apr MMIX  НьРм
- *    6 Apr MMIX  ПCР│
- *   16 Apr MMIX  ПCР│
- *   13 Nov MMIX  ПCР│
+ *  х▒ецн┤
+ *    4 Apr MMIX  ф╜ЬцИР
+ *    6 Apr MMIX  ф┐оцнг
+ *   16 Apr MMIX  ф┐оцнг
+ *   13 Nov MMIX  ф┐оцнг
  */
 #include "strconv.h"
 #include <cwctype>
