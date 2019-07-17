@@ -2,26 +2,33 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 SET(CMAKE_VERBOSE_MAKEFILE 1)
-
-#PROJECT(themis CXX)
+PROJECT(themis CXX)
 
 SET(CMAKE_CXX_FLAGS "-Wall -std=c++17 -O3")
-#SET(CMAKE_CXX_FLAGS "-Wall -std=c++14 -O3")
-#SET(CMAKE_CXX_FLAGS "-Wall -std=c++11 -O3")
-include_directories("${CMAKE_INSTALL_PREFIX}/include")
 
-ADD_LIBRARY(themis STATIC
-  strconv.cpp
-  strconv_tolower.cpp
-  wstrconv_tolower.cpp
+ADD_LIBRARY(themis INTERFACE)
+
+SET(THEMIS_HEADERS
+  except.h
+  inttype.h
 )
 
-INSTALL(TARGETS themis DESTINATION lib)
+
+INSTALL(TARGETS themis
+  EXPORT themis-export
+#  ARCHIVE DESTINATION lib
+  INCLUDES DESTINATION include
+#  PUBLIC_HEADER DESTINATION include/themis
+)
+
+INSTALL(EXPORT themis-export
+  FILE themis-config.cmake
+  DESTINATION share/cmake/themis/
+#  EXPORT_LINK_INTERFACE_LIBRARIES
+)
+
 INSTALL(FILES
-    except.h
-    inttype.h
-    listen.h
-    strconv.h
+    ${THEMIS_HEADERS}
   DESTINATION
     include/themis
 )
