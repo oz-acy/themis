@@ -28,6 +28,7 @@ CMakeLists.txtに
     target_link_libraries(targetname themis ...)
 
 のやうに書けば、include pathを適宜設定してくれる、はず。
+
 この場合、ソースコードからは、
 
     #include <themis/except.h>
