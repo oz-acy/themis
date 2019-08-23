@@ -1,40 +1,44 @@
 # project Themis
 
-## ����Ϥʤ�?
-¾�Υ饤�֥��䥢�ץꥱ�����������椹��Ȥ���
-�ȤҲ����Ǥ��餦����Ū�ʥ����ɤ�
-�饤�֥���Ż��Ƥ������ȴ�Ԧ������Ρ�
+## これはなに?
+他のライブラリやアプリケーションを實裝するときに
+使ひ廻すであらう基礎的なコードを、
+ライブラリに纏めておかうと企圖したもの。
 
-## Themis�Ȥ�?
-[�����ƥߥ�][https://ja.wikipedia.org/wiki/%E3%83%86%E3%83%9F%E3%82%B9]��̾�������ڤ�����
+## Themisとは?
+[女神テミス](https://ja.wikipedia.org/wiki/%E3%83%86%E3%83%9F%E3%82%B9)の名前を拜借した。
 
-## ����
-* ���ˤ���̾ <themis/inttype.h>
-* ����Ȥʤ������㳰���饹 <themis/except.h>
+## 内容
+* 整數の別名 <themis/inttype.h>
+* 基底となり得る例外クラス <themis/except.h>
 
-���ˤ���̾�ˤĤ��Ƥϡ������鿷�����񤯥����ɤǻȤդ䤦�ʤ�ΤǤϤʤ��Ȳ�ʤ���פա�&lt;cstdint&gt;��������줿̾����Ȥ������������̣�ǵ������餦��
+整數の別名については、今から新しく書くコードで使ふやうなものではないと我ながら思ふ。<cstdint>で定義された名前を使ふ方があらゆる意味で宜しからう。
 
-## �Ȥ���
-CMakeLists.txt���󶡤��Ƥ��Τǡ�������Ѥ�ƥ��󥹥ȡ��뤷�Ƥ�褤����
-(���ΤȤ���)���Ƥ��إå��ե���������椵��Ƥ��Τǡ�
-�إå��ե������Ŭ�ĤʤȤ����˥��ԡ�����include���ƻȤĤƤ�褤��
+## 使ひ方
+CMakeLists.txtを提供してゐるので、それを用ゐてインストールしてもよいし、
+(今のところ)全てがヘッダファイルで實裝されてゐるので、
+ヘッダファイルを適當なところにコピーしてincludeして使つてもよい。
 
-cmake���Ѥ�ƥ��󥹥ȡ��뤷����硢
-libthemis�����Ѥ���ץ�������cmake��ȤĤ�build����ΤǤ���С�
-CMakeLists.txt��
+cmakeを用ゐてインストールした場合、
+libthemisを利用するプログラムをcmakeを使つてbuildするのであれば、
+CMakeLists.txtに
+
     find_package(themis REQUIRED)
     # ...
     target_link_libraries(targetname themis ...)
-�Τ䤦�˽񤱤С�include path��Ŭ�����ꤷ�Ƥ���롢�Ϥ���
-���ξ�硢�����������ɤ���ϡ�
+
+のやうに書けば、include pathを適宜設定してくれる、はず。
+この場合、ソースコードからは、
+
     #include <themis/except.h>
-�Τ䤦��include���롣
 
-## �饤����
-[�����BSD�饤����][https://opensource.org/licenses/BSD-2-Clause]�Ȥ��롣
+のやうにincludeする。
 
-## ���
-oZ/acy (̾����)
+## ライセンス
+[二條項BSDライセンス][https://opensource.org/licenses/BSD-2-Clause]とする。
+
+## 作者
+oZ/acy (名賀月晃嗣)
 * <acy@hiemalis.org>
 * <http://www.hiemalis.org>
 
