@@ -12,7 +12,7 @@
 * 整數の別名 <themis/inttype.h>
 * 基底となり得る例外クラス <themis/except.h>
 
-整數の別名については、今から新しく書くコードで使ふやうなものではないと我ながら思ふ。<cstdint>で定義された名前を使ふ方があらゆる意味で宜しからう。
+整數の別名については、今から新しく書くコードで使ふやうなものではないと我ながら思ふ。&lt;cstdint&gt;で定義された名前を使ふ方があらゆる意味で宜しからう。
 
 ## 使ひ方
 CMakeLists.txtを提供してゐるので、それを用ゐてインストールしてもよいし、
@@ -35,7 +35,7 @@ CMakeLists.txtに
 のやうにincludeする。
 
 ## ライセンス
-[二條項BSDライセンス][https://opensource.org/licenses/BSD-2-Clause]とする。
+[二條項BSDライセンス](https://opensource.org/licenses/BSD-2-Clause)とする。
 
 ## 作者
 oZ/acy (名賀月晃嗣)
