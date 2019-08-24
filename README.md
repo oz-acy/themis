@@ -7,7 +7,7 @@
 
 
 ## Themisとは?
-[女神テミス](https://ja.wikipedia.org/wiki/%E3%83%86%E3%83%9F%E3%82%B9)の名前を拜借した。
+[女神テミス](https://ja.wikipedia.org/wiki/%E3%83%86%E3%83%9F%E3%82%B9)の名を拜借した。
 
 
 ## 内容
