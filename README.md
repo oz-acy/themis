@@ -26,17 +26,17 @@ CMakeLists.txtを提供してゐるので、それを用ゐてインストール
 CMakeを用ゐてインストールした場合、
 libthemisを利用するプログラムをCMakeを使つてbuildするときには、
 CMakeLists.txtに
-
-    find_package(themis REQUIRED)
-    # ...
-    target_link_libraries(targetname themis ...)
-
+```CMake
+find_package(themis REQUIRED)
+# ...
+target_link_libraries(targetname themis ...)
+```
 のやうに書けば、include pathを適宜設定してくれる、はず。
 
 この場合、ソースコードからは、
-
-    #include <themis/exception.h>
-
+```C++
+#include <themis/exception.h>
+```
 のやうにincludeする。
 
 
