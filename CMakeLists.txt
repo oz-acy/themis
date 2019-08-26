@@ -18,8 +18,9 @@ ADD_LIBRARY(themis INTERFACE)
 #)
 
 SET(THEMIS_HEADERS
-  except.h
+  exception.h
   inttype.h
+  noncopyable.h
 )
 
 

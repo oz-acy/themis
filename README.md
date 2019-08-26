@@ -12,7 +12,8 @@
 
 ## 内容
 * 整數の別名 <themis/inttype.h>
-* 基底となり得る例外クラス <themis/except.h>
+* 基底となり得る例外クラス <themis/exception.h>
+* Noncopyableクラステンプレート <themis/noncopyable.h>
 
 整數の別名については、今から新しく書くコードで使ふやうなものではないと我ながら思ふ。&lt;cstdint&gt;で定義された名前を使ふ方があらゆる意味で宜しからう。
 
@@ -34,7 +35,7 @@ CMakeLists.txtに
 
 この場合、ソースコードからは、
 
-    #include <themis/except.h>
+    #include <themis/exception.h>
 
 のやうにincludeする。
 

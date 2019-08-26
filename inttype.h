@@ -4,12 +4,11 @@
  *  @author oZ/acy(名賀月晃嗣)
  *  @brief 整數型別名定義
  *  @date 2019.7.16 内容整形
- *//*
- *  (c) 2001-2019 oZ/acy.  ALL RIGHTS RESERVED.
+ *  @date 2019.8.26 include guardを修正
  */
 
-#ifndef INC_THEMIS_INTTYPE_H___
-#define INC_THEMIS_INTTYPE_H___
+#ifndef INCLUDE_GUARD_THEMIS_INTTYPE_H
+#define INCLUDE_GUARD_THEMIS_INTTYPE_H
 
 #include <cstdint>
 
@@ -38,4 +37,4 @@ namespace themis
 }//end of namespace themis
 
 
-#endif // INC_THEMIS_INTTYPE_H___
+#endif // INCLUDE_GUARD_THEMIS_INTTYPE_H

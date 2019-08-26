@@ -1,14 +1,13 @@
 /**********************************************************************//**
  *
- *  @file except.h
+ *  @file exception.h
  *  @author oZ/acy (名賀月晃嗣)
  *  @brief 例外情報格納クラス
  *  @date 2016.3.2  C++11對應
- *//*
- *  (c) 2001-2018 oZ/acy. ALL RIGHTS RESERVED.
+ *  @date 2019.8.26 include guardを修正
  */
-#ifndef INC_THEMIS_EXCEPT_H__
-#define INC_THEMIS_EXCEPT_H__
+#ifndef INCLUDE_GUARD_THEMIS_EXCEPTION_H
+#define INCLUDE_GUARD_THEMIS_EXCEPTION_H
 
 #include <string>
 #include <iostream>
@@ -105,4 +104,4 @@ inline std::ostream& operator<<(std::ostream& os, const Exception& ex)
 }// end of namespace themis
 
 
-#endif
+#endif // INCLUDE_GUARD_THEMIS_EXCEPT_H
