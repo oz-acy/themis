@@ -1,10 +1,38 @@
-/**********************************************************************//**
+/*
+ * Copyright 2001-2021 oZ/acy (名賀月晃嗣)
+ * Redistribution and use in source and binary forms, 
+ *     with or without modification, 
+ *   are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ */
+/**
  *
  *  @file exception.h
  *  @author oZ/acy (名賀月晃嗣)
- *  @brief 例外情報格納クラス
+ *  @brief 例外クラス
+ *
  *  @date 2016.3.2  C++11對應
  *  @date 2019.8.26 include guardを修正
+ *  @date 2021.3.25 コメントを整理
  */
 #ifndef INCLUDE_GUARD_THEMIS_EXCEPTION_H
 #define INCLUDE_GUARD_THEMIS_EXCEPTION_H
@@ -16,18 +44,21 @@
 namespace themis
 {
 
-/*--------------------------------------*//**
+/**
  * @brief 空の例外クラス
  */
 class EmptyException : public std::exception
 {
 public:
-  EmptyException() noexcept {}
-  virtual ~EmptyException() noexcept {}
+  /// @brief 構築子
+  EmptyException() noexcept {} 
+
+  /// @brief 解體子
+  virtual ~EmptyException() noexcept {} 
 
   /// @brief エラー内容取得
   ///
-  /// std::exception::what()をオーバーライド。
+  /// std::exception::what()の實裝定義。
   /// C文字列"themis::EmptyException"を返す。
   const char* what() const noexcept override
   {
@@ -37,17 +68,22 @@ public:
 };
 
 
-
-//-------------------------------------------
 class Exception;
-
 std::ostream& operator<<(std::ostream& os, const Exception& ex);
 
 /**
- * @brief メッセージ文字列を持つ例外クラス
+ * @brief メッセージ文字列附き例外クラス
+ *
+ * 一つのメッセージ文字列を保持する例外クラス。
+ * 出力ストリームに保持するメッセージ文字列を出力することができる。
  */
 class Exception : public EmptyException
 {
+  /// @brief 插入演算子
+  ///
+  /// 出力ストリームにExceptionの保持するメッセージ文字列を出力する。
+  /// @param os 左邊。出力ストリーム。
+  /// @param ex 右邊。出力對象のException。
   friend std::ostream&
          themis::operator<<(std::ostream& os, const Exception& ex);
 
@@ -57,21 +93,25 @@ protected:
 public:
   /// @brief デフォルト構築子
   ///
-  /// メッセージを空文字で初期化する。
+  /// メッセージ文字列を空文字列で初期化する。
   Exception() noexcept {}
 
   /// @brief 構築子
   ///
-  /// メッセージ文字列を文字列mで初期化する。
+  /// メッセージ文字列を與へて初期化する。
+  ///
+  /// @param m メッセージ文字列
   Exception(const std::string& m) : msg_(m) {}
 
-  /// @brief メッセージ文字列の頭にクラス名、函數名を附加する場合の構築子
+  /// @brief 構築子
   ///
-  /// メッセージ文字列を、"クラス名c::函數名f : メッセージm"の書式で
-  /// 初期化する。
+  /// クラス名、函數名、メッセージを與へて初期化する。
+  /// 
+  /// メッセージ文字列を「クラス名::函數名 : メッセージ」の書式で初期化する。
+  /// 
   /// @param c クラス名
   /// @param f 函數名
-  /// @param m メッセージ
+  /// @param m メッセージ文字列
   Exception(const std::string& c, const std::string& f, const std::string& m)
   {
     msg_ = c + "::" + f + " : " + m;
@@ -82,7 +122,7 @@ public:
 
   /// @brief エラー内容取得
   ///
-  /// std::exception::what()をオーバーライド。
+  /// std::exception::what()の実装定義。
   /// C文字列"themis::Exception"を返す。
   const char* what() const noexcept override
   {
@@ -91,10 +131,6 @@ public:
   }
 };
 
-
-/// @brief 出力ストリームにメッセージ文字列を出力
-///
-/// 出力ストリームosに、例外exの保持するメッセージ文字列を出力する。
 inline std::ostream& operator<<(std::ostream& os, const Exception& ex)
 {
   return os << ex.msg_;
